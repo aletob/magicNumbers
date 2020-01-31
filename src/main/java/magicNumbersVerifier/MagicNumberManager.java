@@ -61,6 +61,16 @@ public class MagicNumberManager {
             }
         }
         System.out.println("Given extension is incorrect. It's not " + extension);
+
+        for (Map.Entry<String, FileType> anotherExtensionItem : supportedExtensions.entrySet()) {
+            for (String[] itemMagicNumbers : anotherExtensionItem.getValue().getMagicNumbers()) {
+                if (Arrays.equals(itemMagicNumbers, (MagicNumberManager.countNumbersOfGivenFile(file, anotherExtensionItem.getKey())))) {
+                    System.out.println("Real extension of given file is: " + anotherExtensionItem.getKey());
+                    return false;
+                }
+            }
+
+        }
         return false;
     }
 
