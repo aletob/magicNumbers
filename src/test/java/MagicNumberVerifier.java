@@ -1,5 +1,6 @@
 import magicNumbersVerifier.FileReader;
 import magicNumbersVerifier.MagicNumberManager;
+import magicNumbersVerifier.exceptions.UnsupportedFileTypeException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -38,5 +39,28 @@ public class MagicNumberVerifier {
         boolean isSupported = MagicNumberManager.isExtensionSupported(file);
 
         Assert.assertTrue(isSupported);
+    }
+
+    @Test(expected = UnsupportedFileTypeException.class)
+    public void shouldThrowExceptionIfExtensionDOCX() throws Exception{
+        String filePath = new File("").getAbsolutePath();
+        String existingFile = "test.docx";
+        String nameWithPath = filePath + "\\" + existingFile;
+        File file = FileReader.readFileFromPath(nameWithPath);
+        MagicNumberManager.isExtensionSupported(file);
+
+    }
+
+    @Test
+    public void shouldReturnArray() throws Exception{
+
+        String filePath = new File("").getAbsolutePath();
+        String existingFile = "test.jpg";
+        String nameWithPath = filePath + "\\" + existingFile;
+        File file = FileReader.readFileFromPath(nameWithPath);
+        String[] calculatedMagicNumbers = MagicNumberManager.countNumbersOfGivenFile(file, "JPG");
+
+        String[] jpgArray = MagicNumberManager.getSupportedExtensions().get("JPG").getMagicNumbers().get(0);
+        Assert.assertArrayEquals(jpgArray, calculatedMagicNumbers);
     }
 }

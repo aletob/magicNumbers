@@ -4,6 +4,8 @@ import magicNumbersVerifier.exceptions.IncorrectFileNameException;
 import magicNumbersVerifier.exceptions.UnsupportedFileTypeException;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Map;
 
 public class MagicNumberManager {
@@ -30,6 +32,21 @@ public class MagicNumberManager {
         } else {
             throw new UnsupportedFileTypeException(givenExtension);
         }
+    }
+
+    public static String[] countNumbersOfGivenFile(File file, String extension) throws Exception {
+        byte[] bFile = Files.readAllBytes(Paths.get(file.getPath()));
+
+        int bytesToCheck = supportedExtensions.get(extension).getBytesToCheck().length;
+        String[] givenFileNumbers = new String[bytesToCheck];
+
+        int byteIndex;
+        for (int i = 0; (i < bytesToCheck && i < bFile.length); i++) {
+            byteIndex = supportedExtensions.get(extension).getBytesToCheck()[i];
+            byteIndex = byteIndex >= 0 ? byteIndex : bFile.length + byteIndex;
+            givenFileNumbers[i] = String.format("%02X", bFile[byteIndex]);
+        }
+        return givenFileNumbers;
     }
 
 
