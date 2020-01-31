@@ -1,0 +1,6 @@
+Plan:
+1) Set known files' magic number info
+2) Read file location from user
+3) Count magic numbers from given file
+4) Handle unexpected actions
+5) Improve communication with user
