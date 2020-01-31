@@ -4,17 +4,9 @@ import java.io.*;
 
 public class FileReader {
 
-    public static String getFileName() throws IOException {
-
+    public static String getFileName(String userInput) throws Exception {
         String filePath = new File("").getAbsolutePath();
-        System.out.println("Give a file from location: " + filePath);
-
-        BufferedReader fileNameReader = new BufferedReader(new InputStreamReader(System.in));
-        String fileName = fileNameReader.readLine();
-
-        System.out.println("Given file: " + fileName);
-
-        return filePath + "\\" + fileName;
+        return filePath + "\\" + userInput;
 
     }
 
