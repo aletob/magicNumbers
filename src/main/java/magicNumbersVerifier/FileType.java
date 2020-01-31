@@ -51,12 +51,16 @@ public class FileType {
         List<String[]> xmlNumbers = Collections.singletonList(new String[]{"3C", "3F", "78", "6D", "6C", "20"});
         FileType xml = new FileType("XML", xmlNumbers, new int[]{0, 1, 2, 3, 4, 5});
 
+        List<String[]> txtNumbers = Collections.singletonList(new String[]{"EF", "BB", "BF"});
+        FileType txt = new FileType("TXT", txtNumbers, new int[]{0, 1, 2});
+
 
         supportedFiles.put(jpg.getExtension(), jpg);
         supportedFiles.put(gif.getExtension(), gif);
         supportedFiles.put(png.getExtension(), png);
         supportedFiles.put(pdf.getExtension(), pdf);
         supportedFiles.put(xml.getExtension(), xml);
+        supportedFiles.put(txt.getExtension(), txt);
 
         return supportedFiles;
     }
