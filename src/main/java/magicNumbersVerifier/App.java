@@ -8,9 +8,12 @@ public class App {
         try {
             String inputFileNAme = FileReader.getFileName();
             File file = FileReader.readFileFromPath(inputFileNAme);
+            if (MagicNumberManager.isExtensionSupported(file)) {
+                System.out.println("Supported");
+            }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }
