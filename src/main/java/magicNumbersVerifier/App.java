@@ -9,7 +9,7 @@ public class App {
             String inputFileNAme = FileReader.getFileName();
             File file = FileReader.readFileFromPath(inputFileNAme);
             if (MagicNumberManager.isExtensionSupported(file)) {
-                System.out.println("Supported");
+                MagicNumberManager.verifyFileNumbers(file);
             }
 
         } catch (Exception e) {

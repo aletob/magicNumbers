@@ -6,6 +6,7 @@ import magicNumbersVerifier.exceptions.UnsupportedFileTypeException;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Map;
 
 public class MagicNumberManager {
@@ -47,6 +48,20 @@ public class MagicNumberManager {
             givenFileNumbers[i] = String.format("%02X", bFile[byteIndex]);
         }
         return givenFileNumbers;
+    }
+
+    public static boolean verifyFileNumbers(File file) throws Exception {
+        String extension = MagicNumberManager.getExtension(file);
+        String[] givenFileNumbers = MagicNumberManager.countNumbersOfGivenFile(file, extension);
+
+        for (String[] array : supportedExtensions.get(extension).getMagicNumbers()) {
+            if (Arrays.equals(array, givenFileNumbers)) {
+                System.out.println("File format correct, it's " + extension);
+                return true;
+            }
+        }
+        System.out.println("Given extension is incorrect. It's not " + extension);
+        return false;
     }
 
 
