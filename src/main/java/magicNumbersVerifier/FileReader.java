@@ -6,7 +6,7 @@ public class FileReader {
 
     public static String getFileName(String userInput) throws Exception {
         String filePath = new File("").getAbsolutePath();
-        return filePath + "\\" + userInput;
+        return new StringBuilder(filePath).append(File.separator).append(userInput).toString();
 
     }
 
